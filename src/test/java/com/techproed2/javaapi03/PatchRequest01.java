@@ -2,6 +2,8 @@ package com.techproed2.javaapi03;
 
 import java.util.HashMap;
 import static io.restassured.RestAssured.*;
+
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import io.restassured.http.ContentType;
@@ -37,7 +39,16 @@ HashMap<String,Object> data=new HashMap<String, Object>();
 		Response response=given().contentType(ContentType.JSON).spec(spec)
 				.body(data).when().patch("/{todos}/{id}");
 		
-		response.prettyPrint();		
+		response.prettyPrint();	
+		
+		response.then().assertThat().statusCode(200)
+		.body("userId", Matchers.equalTo(10),"id",Matchers.equalTo(198),
+				"title",Matchers.equalTo("Tidy your room"),
+				"completed",Matchers.equalTo(true));
+		
+		
+		
+		
 	}
 	
 	

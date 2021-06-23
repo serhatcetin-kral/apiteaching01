@@ -1,5 +1,6 @@
 package com.techproed2.javaapi03;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import static io.restassured.RestAssured.*;
 import io.restassured.response.Response;
@@ -25,7 +26,9 @@ public class DeleteRequest01 extends BaseUrlDelete {
 		
 		Response response=given().spec(spec).when().delete("/{api}/{version}/{delete}/{id}");
 		response.prettyPrint();
-		
+		response.then().assertThat().statusCode(200)
+		.body("status", Matchers.equalTo("success"),"data",Matchers.equalTo("2"),
+				"message",Matchers.equalTo("Successfully! Record has been deleted"));
 		
 		
 	}

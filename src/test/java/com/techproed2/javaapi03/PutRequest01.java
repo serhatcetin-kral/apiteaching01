@@ -2,6 +2,8 @@ package com.techproed2.javaapi03;
 
 import java.util.HashMap;
 import static io.restassured.RestAssured.*;
+
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import io.restassured.http.ContentType;
@@ -43,6 +45,10 @@ HashMap<String,Object> data=new HashMap<String, Object>();
 				.when().put("/{todos}/{id}");
 		response.prettyPrint();
 		
+		
+		response.then().assertThat().statusCode(200)
+		.body("userId", Matchers.equalTo(21),"title",Matchers.equalTo("Wash the dishes")
+				,"completed",Matchers.equalTo(false),"id",Matchers.equalTo(198));
 	}
 	
 	

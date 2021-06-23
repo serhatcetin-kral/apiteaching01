@@ -51,23 +51,30 @@ public class GetRequest07 extends TestBaseHerOkuApp {
 		
 		JsonPath json=response.jsonPath();
 		
-	assertEquals("Sally",json.getString("firstname"));
-	assertEquals("Brown",json.getString("lastname"));
-	//assertEquals(296,json.getInt("totalprice"));
-	
-	assertEquals(false,json.getBoolean("depositpaid"));
-	assertEquals("2020-12-15",json.getString("bookingdates.checkin"));
-	assertEquals("2021-03-30",json.getString("bookingdates.checkout"));
+//	assertEquals("Mark",json.getString("firstname"));
+//	assertEquals("Smith",json.getString("lastname"));
+//	assertEquals(827,json.getInt("totalprice"));
+//	
+//	assertEquals(true,json.getBoolean("depositpaid"));
+//	assertEquals("2016-09-21",json.getString("bookingdates.checkin"));
+//	assertEquals("2019-07-04",json.getString("bookingdates.checkout"));
 	
 	
 	SoftAssert softAssert=new SoftAssert();
 	
-	softAssert.assertEquals(json.getInt("totalprice"),296);
 	
 	
+	softAssert.assertEquals(json.getString("firstname"), "Sally");
+	
+	softAssert.assertEquals(json.getString("lastname"),"Jones");
+	
+	softAssert.assertEquals(json.getInt("totalprice"),763);
+	softAssert.assertEquals(json.getBoolean("depositpaid"), true);
 	
 	
+	softAssert.assertEquals(json.getString("bookingdates.checkin"),"2016-11-16" );
 	
+	softAssert.assertEquals(json.getString("bookingdates.checkout"),"2018-12-12" );
 	}
 	
 	
